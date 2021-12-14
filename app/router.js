@@ -7,9 +7,9 @@
 module.exports = app => {
   const { router, controller } = app;
   const test = app.middleware.test();
-  router.get('/getUser', test, controller.home.index);
+  router.post('/getUser', test, controller.home.index);
   router.post('/postTest', test, controller.home.postTest);
-
+  router.post('/signUp', test, controller.home.signUp);
 
 
 

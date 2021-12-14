@@ -9,17 +9,17 @@ class HomeController extends Controller {
   }
   // get
   async index() {
-    this.ctx.body = await this.ctx.service.user.findUser(this.ctx.query);
-    this.ctx.body = {
-      meta: {
-        code: 200,
-        message: 'success'
-      },
-      data: {
-        val: this.ctx.query,
-        user: userInfo
-      }
-    };
+    this.ctx.body = await this.ctx.service.user.findUser(JSON.parse(this.ctx.request.body.data));
+    // this.ctx.body = {
+    //   meta: {
+    //     code: 200,
+    //     message: 'success'
+    //   },
+    //   data: {
+    //     val: this.ctx.query,
+    //     user: userInfo
+    //   }
+    // };
   }
   // post
   async postTest(val){
@@ -32,6 +32,11 @@ class HomeController extends Controller {
         val: JSON.parse(this.ctx.request.body.data).val
       }
     };
+  }
+
+  // @post
+  async signUp(){
+    this.ctx.body = await this.ctx.service.user.signUp(JSON.parse(this.ctx.request.body.data));
   }
 }
 
