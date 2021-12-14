@@ -7,9 +7,9 @@
 module.exports = app => {
   const { router, controller } = app;
   const test = app.middleware.test();
-  router.get('/getUser', test, controller.home.index);
+  router.post('/getUser', test, controller.home.index);
   router.post('/postTest', test, controller.home.postTest);
-
+  router.post('/signUp', test, controller.home.signUp);
 
 
 
@@ -17,5 +17,6 @@ module.exports = app => {
   router.post('/setSQL', test, controller.mysql.setSQL);
   router.get('/getDatabaseTree', test, controller.mysql.getDatabaseTree);
   router.post('/getTableData', test, controller.mysql.getTableData)
+  router.post('/transaction', test, controller.mysql.transaction)
 
 };
