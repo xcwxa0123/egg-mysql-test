@@ -17,5 +17,6 @@ module.exports = app => {
   router.post('/setSQL', test, controller.mysql.setSQL);
   router.get('/getDatabaseTree', test, controller.mysql.getDatabaseTree);
   router.post('/getTableData', test, controller.mysql.getTableData)
+  router.post('/transaction', test, controller.mysql.transaction)
 
 };

@@ -23,6 +23,11 @@ class MysqlController extends Controller{
     async getTableData(){
         this.ctx.body = await this.ctx.service.mysql.getTableData(this.postParams);
     }
+
+    // sql事务
+    async transaction(){
+        this.ctx.body = await this.ctx.service.mysql.transaction(this.postParams);
+    }
 }
 
 module.exports = MysqlController;

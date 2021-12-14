@@ -10,7 +10,7 @@ class MysqlService extends Service{
     // POST 任意sql语句
     async setSQL(data){
         // if(JSON.parse(data).sqlcontent.startsWith('//')){
-            
+            // 测试1分支加文字
         // }
         const sqlContent = JSON.parse(data).sqlcontent;
         const result = await this.app.mysql.get('db1').query(sqlContent, '');
@@ -62,15 +62,15 @@ class MysqlService extends Service{
         //     changedRows: 0
         //   }
 
-        let nameList = [];
-        result.forEach(element => {
-            let otherName = Object.keys(element).filter(e => {
-                return !nameList.includes(e) ? e : ''
-            })
-            nameList = nameList.concat(otherName);
-        });
+        // let nameList = [];
+        // result.forEach(element => {
+        //     let otherName = Object.keys(element).filter(e => {
+        //         return !nameList.includes(e) ? e : ''
+        //     })
+        //     nameList = nameList.concat(otherName);
+        // });
 
-        return Promise.resolve(new ResponseData(200, 'msg', { nameList, dataList: result }))
+        return Promise.resolve(new ResponseData(200, 'msg', result))
     }
 
     // GET 获取数据库-表结构树
@@ -150,6 +150,22 @@ class MysqlService extends Service{
         });
 
         return Promise.resolve(new ResponseData(200, 'msg', { nameList, dataList }));
+    }
+
+    // POST 事务
+    async transaction(dataArray){
+        const conn = await this.app.mysql.get(sqlName).beginTransaction();
+        try {
+            for (let index = 0; index < dataArray.length; index++) {
+                const sqlContent = dataArray[index];
+                const connResult = await conn.query(sqlContent);
+            }
+            await conn.commit();
+            return Promise.resolve(new ResponseData(200, 'msg', conn))
+        } catch (err) {
+            await conn.rollback();
+            throw err;
+        }
     }
     
     // @
