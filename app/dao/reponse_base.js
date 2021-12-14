@@ -18,6 +18,6 @@ class Meta{
 
 // export class Error<T = Number | String>{
 //     code: T;
-//     message: String;
+//     message: String; 试试
 // }
 module.exports = { ResponseData, Meta}
