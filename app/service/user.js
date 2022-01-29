@@ -16,7 +16,7 @@ class UserService extends Service{
             let result = {};
             // 1 通过 0 不通过
             if(res.data && res.data.length){
-                result = { status: 1 }
+                result = { status: 1, ...res.data[0] }
             } else {
                 result = { status: 0 }
             }
